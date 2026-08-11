@@ -82,11 +82,11 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
   }
 
   return (
-    <article className="group flex flex-col">
+    <article className="glass-card group flex flex-col overflow-hidden rounded-2xl p-3">
       <Link
         to="/noticia/$slug"
         params={{ slug: post.slug }}
-        className="relative mb-3 block aspect-[16/10] overflow-hidden rounded-xl bg-muted"
+        className="relative mb-3 block aspect-[16/10] overflow-hidden rounded-xl bg-muted/60"
       >
         <CoverImage
           src={post.cover_image}

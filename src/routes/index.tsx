@@ -118,7 +118,7 @@ function HomePage() {
             </div>
 
             <aside className="space-y-6 lg:col-span-4">
-              <div className="rounded-xl border border-border bg-card p-5 shadow-sm">
+              <div className="glass-card rounded-2xl p-5">
                 <div className="mb-4 flex items-center gap-2">
                   <TrendingUp className="h-5 w-5 text-primary" />
                   <h2 className="text-lg font-bold text-card-foreground">Mais lidas</h2>
@@ -135,7 +135,7 @@ function HomePage() {
                 </div>
               </div>
 
-              <div className="rounded-xl border border-border bg-primary p-5 text-primary-foreground shadow-sm">
+              <div className="brand-gradient rounded-2xl border border-white/30 p-5 text-primary-foreground shadow-lg">
                 <div className="mb-3 flex items-center gap-2">
                   <Mail className="h-5 w-5" />
                   <h2 className="text-lg font-bold">Newsletter</h2>
@@ -213,9 +213,9 @@ function HomePage() {
               {[1, 2, 3].map((i) => (
                 <div
                   key={i}
-                  className="flex items-center gap-4 rounded-xl border border-border bg-card p-4 shadow-sm"
+                  className="glass-card flex items-center gap-4 rounded-2xl p-4"
                 >
-                  <div className="flex h-14 w-14 flex-col items-center justify-center rounded-lg bg-muted text-foreground">
+                  <div className="brand-gradient flex h-14 w-14 flex-col items-center justify-center rounded-xl text-primary-foreground">
                     <span className="text-xs font-semibold uppercase">SET</span>
                     <span className="text-xl font-bold">{10 + i}</span>
                   </div>
