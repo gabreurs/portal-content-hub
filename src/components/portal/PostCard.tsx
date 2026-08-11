@@ -88,18 +88,11 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
         params={{ slug: post.slug }}
         className="relative mb-3 block aspect-[16/10] overflow-hidden rounded-xl bg-muted"
       >
-        {post.cover_image ? (
-          <img
-            src={post.cover_image}
-            alt={post.title}
-            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-            loading="lazy"
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center text-muted-foreground">
-            <span className="text-sm">Sem imagem</span>
-          </div>
-        )}
+        <CoverImage
+          src={post.cover_image}
+          alt={post.title}
+          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+        />
       </Link>
       {post.categories && (
         <Link
