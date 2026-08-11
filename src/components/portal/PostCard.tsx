@@ -24,7 +24,7 @@ interface Post {
 
 interface PostCardProps {
   post: Post;
-  variant?: "default" | "horizontal" | "compact";
+  variant?: "default" | "horizontal" | "compact" | "list";
 }
 
 export function PostCard({ post, variant = "default" }: PostCardProps) {
@@ -34,7 +34,7 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
 
   if (variant === "horizontal") {
     return (
-      <article className="group flex gap-4">
+      <article className="surface-card group flex gap-4 rounded-xl p-3">
         <Link
           to="/noticia/$slug"
           params={{ slug: post.slug }}
@@ -68,6 +68,32 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
     );
   }
 
+  if (variant === "list") {
+    return (
+      <article className="group flex gap-3">
+        <Link
+          to="/noticia/$slug"
+          params={{ slug: post.slug }}
+          className="relative block h-16 w-20 flex-shrink-0 overflow-hidden rounded-md bg-muted"
+        >
+          <CoverImage
+            src={post.cover_image}
+            alt={post.title}
+            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+        </Link>
+        <div className="min-w-0">
+          <Link to="/noticia/$slug" params={{ slug: post.slug }}>
+            <h3 className="line-clamp-3 text-sm font-semibold leading-snug text-foreground transition-colors group-hover:text-primary">
+              {post.title}
+            </h3>
+          </Link>
+          {date && <time className="mt-1 block text-xs text-muted-foreground">{date}</time>}
+        </div>
+      </article>
+    );
+  }
+
   if (variant === "compact") {
     return (
       <article className="group">
@@ -82,7 +108,7 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
   }
 
   return (
-    <article className="glass-card group flex flex-col overflow-hidden rounded-2xl p-3">
+    <article className="surface-card group flex flex-col overflow-hidden rounded-xl p-3">
       <Link
         to="/noticia/$slug"
         params={{ slug: post.slug }}
