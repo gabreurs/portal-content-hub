@@ -16,6 +16,7 @@ import { Route as ColunistasRouteImport } from './routes/colunistas'
 import { Route as SetupAdminRouteImport } from './routes/setup-admin'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as CategoriaSlugRouteImport } from './routes/categoria.$slug'
+import { Route as ColunistaSlugRouteImport } from './routes/colunista.$slug'
 import { Route as NoticiaSlugRouteImport } from './routes/noticia.$slug'
 import { Route as AuthenticatedAdminNovaRouteImport } from './routes/_authenticated/admin.nova'
 import { Route as AuthenticatedAdminEditIdRouteImport } from './routes/_authenticated/admin.edit.$id'
@@ -54,6 +55,11 @@ const CategoriaSlugRoute = CategoriaSlugRouteImport.update({
   path: '/categoria/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ColunistaSlugRoute = ColunistaSlugRouteImport.update({
+  id: '/colunista/$slug',
+  path: '/colunista/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NoticiaSlugRoute = NoticiaSlugRouteImport.update({
   id: '/noticia/$slug',
   path: '/noticia/$slug',
@@ -78,6 +84,7 @@ export interface FileRoutesByFullPath {
   '/setup-admin': typeof SetupAdminRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/categoria/$slug': typeof CategoriaSlugRoute
+  '/colunista/$slug': typeof ColunistaSlugRoute
   '/noticia/$slug': typeof NoticiaSlugRoute
   '/admin/nova': typeof AuthenticatedAdminNovaRoute
   '/admin/edit/$id': typeof AuthenticatedAdminEditIdRoute
@@ -89,6 +96,7 @@ export interface FileRoutesByTo {
   '/setup-admin': typeof SetupAdminRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/categoria/$slug': typeof CategoriaSlugRoute
+  '/colunista/$slug': typeof ColunistaSlugRoute
   '/noticia/$slug': typeof NoticiaSlugRoute
   '/admin/nova': typeof AuthenticatedAdminNovaRoute
   '/admin/edit/$id': typeof AuthenticatedAdminEditIdRoute
@@ -102,6 +110,7 @@ export interface FileRoutesById {
   '/setup-admin': typeof SetupAdminRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/categoria/$slug': typeof CategoriaSlugRoute
+  '/colunista/$slug': typeof ColunistaSlugRoute
   '/noticia/$slug': typeof NoticiaSlugRoute
   '/_authenticated/admin/nova': typeof AuthenticatedAdminNovaRoute
   '/_authenticated/admin/edit/$id': typeof AuthenticatedAdminEditIdRoute
@@ -115,6 +124,7 @@ export interface FileRouteTypes {
     | '/setup-admin'
     | '/admin'
     | '/categoria/$slug'
+    | '/colunista/$slug'
     | '/noticia/$slug'
     | '/admin/nova'
     | '/admin/edit/$id'
@@ -126,6 +136,7 @@ export interface FileRouteTypes {
     | '/setup-admin'
     | '/admin'
     | '/categoria/$slug'
+    | '/colunista/$slug'
     | '/noticia/$slug'
     | '/admin/nova'
     | '/admin/edit/$id'
@@ -138,6 +149,7 @@ export interface FileRouteTypes {
     | '/setup-admin'
     | '/_authenticated/admin'
     | '/categoria/$slug'
+    | '/colunista/$slug'
     | '/noticia/$slug'
     | '/_authenticated/admin/nova'
     | '/_authenticated/admin/edit/$id'
@@ -150,6 +162,7 @@ export interface RootRouteChildren {
   ColunistasRoute: typeof ColunistasRoute
   SetupAdminRoute: typeof SetupAdminRoute
   CategoriaSlugRoute: typeof CategoriaSlugRoute
+  ColunistaSlugRoute: typeof ColunistaSlugRoute
   NoticiaSlugRoute: typeof NoticiaSlugRoute
 }
 
@@ -202,6 +215,13 @@ declare module '@tanstack/react-router' {
       path: '/categoria/$slug'
       fullPath: '/categoria/$slug'
       preLoaderRoute: typeof CategoriaSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/colunista/$slug': {
+      id: '/colunista/$slug'
+      path: '/colunista/$slug'
+      fullPath: '/colunista/$slug'
+      preLoaderRoute: typeof ColunistaSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/noticia/$slug': {
@@ -259,6 +279,7 @@ const rootRouteChildren: RootRouteChildren = {
   ColunistasRoute: ColunistasRoute,
   SetupAdminRoute: SetupAdminRoute,
   CategoriaSlugRoute: CategoriaSlugRoute,
+  ColunistaSlugRoute: ColunistaSlugRoute,
   NoticiaSlugRoute: NoticiaSlugRoute,
 }
 export const routeTree = rootRouteImport
