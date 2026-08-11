@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { Eye } from "lucide-react";
+import { CoverImage } from "./CoverImage";
 
 interface FeaturedPostProps {
   post: {
