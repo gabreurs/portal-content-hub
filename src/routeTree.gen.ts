@@ -18,6 +18,7 @@ import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/
 import { Route as CategoriaSlugRouteImport } from './routes/categoria.$slug'
 import { Route as ColunistaSlugRouteImport } from './routes/colunista.$slug'
 import { Route as NoticiaSlugRouteImport } from './routes/noticia.$slug'
+import { Route as AuthenticatedAdminColunistasRouteImport } from './routes/_authenticated/admin.colunistas'
 import { Route as AuthenticatedAdminNovaRouteImport } from './routes/_authenticated/admin.nova'
 import { Route as AuthenticatedAdminEditIdRouteImport } from './routes/_authenticated/admin.edit.$id'
 
@@ -65,6 +66,12 @@ const NoticiaSlugRoute = NoticiaSlugRouteImport.update({
   path: '/noticia/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminColunistasRoute =
+  AuthenticatedAdminColunistasRouteImport.update({
+    id: '/colunistas',
+    path: '/colunistas',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 const AuthenticatedAdminNovaRoute = AuthenticatedAdminNovaRouteImport.update({
   id: '/nova',
   path: '/nova',
@@ -86,6 +93,7 @@ export interface FileRoutesByFullPath {
   '/categoria/$slug': typeof CategoriaSlugRoute
   '/colunista/$slug': typeof ColunistaSlugRoute
   '/noticia/$slug': typeof NoticiaSlugRoute
+  '/admin/colunistas': typeof AuthenticatedAdminColunistasRoute
   '/admin/nova': typeof AuthenticatedAdminNovaRoute
   '/admin/edit/$id': typeof AuthenticatedAdminEditIdRoute
 }
@@ -98,6 +106,7 @@ export interface FileRoutesByTo {
   '/categoria/$slug': typeof CategoriaSlugRoute
   '/colunista/$slug': typeof ColunistaSlugRoute
   '/noticia/$slug': typeof NoticiaSlugRoute
+  '/admin/colunistas': typeof AuthenticatedAdminColunistasRoute
   '/admin/nova': typeof AuthenticatedAdminNovaRoute
   '/admin/edit/$id': typeof AuthenticatedAdminEditIdRoute
 }
@@ -112,6 +121,7 @@ export interface FileRoutesById {
   '/categoria/$slug': typeof CategoriaSlugRoute
   '/colunista/$slug': typeof ColunistaSlugRoute
   '/noticia/$slug': typeof NoticiaSlugRoute
+  '/_authenticated/admin/colunistas': typeof AuthenticatedAdminColunistasRoute
   '/_authenticated/admin/nova': typeof AuthenticatedAdminNovaRoute
   '/_authenticated/admin/edit/$id': typeof AuthenticatedAdminEditIdRoute
 }
@@ -126,6 +136,7 @@ export interface FileRouteTypes {
     | '/categoria/$slug'
     | '/colunista/$slug'
     | '/noticia/$slug'
+    | '/admin/colunistas'
     | '/admin/nova'
     | '/admin/edit/$id'
   fileRoutesByTo: FileRoutesByTo
@@ -138,6 +149,7 @@ export interface FileRouteTypes {
     | '/categoria/$slug'
     | '/colunista/$slug'
     | '/noticia/$slug'
+    | '/admin/colunistas'
     | '/admin/nova'
     | '/admin/edit/$id'
   id:
@@ -151,6 +163,7 @@ export interface FileRouteTypes {
     | '/categoria/$slug'
     | '/colunista/$slug'
     | '/noticia/$slug'
+    | '/_authenticated/admin/colunistas'
     | '/_authenticated/admin/nova'
     | '/_authenticated/admin/edit/$id'
   fileRoutesById: FileRoutesById
@@ -231,6 +244,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NoticiaSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin/colunistas': {
+      id: '/_authenticated/admin/colunistas'
+      path: '/colunistas'
+      fullPath: '/admin/colunistas'
+      preLoaderRoute: typeof AuthenticatedAdminColunistasRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
     '/_authenticated/admin/nova': {
       id: '/_authenticated/admin/nova'
       path: '/nova'
@@ -249,11 +269,13 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedAdminRouteChildren {
+  AuthenticatedAdminColunistasRoute: typeof AuthenticatedAdminColunistasRoute
   AuthenticatedAdminNovaRoute: typeof AuthenticatedAdminNovaRoute
   AuthenticatedAdminEditIdRoute: typeof AuthenticatedAdminEditIdRoute
 }
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
+  AuthenticatedAdminColunistasRoute: AuthenticatedAdminColunistasRoute,
   AuthenticatedAdminNovaRoute: AuthenticatedAdminNovaRoute,
   AuthenticatedAdminEditIdRoute: AuthenticatedAdminEditIdRoute,
 }
