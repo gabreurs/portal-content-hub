@@ -16,7 +16,7 @@ export function Header({ categories }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="border-b border-border bg-background">
+    <header className="sticky top-0 z-50 glass-panel border-b border-border">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between gap-4">
           <Link to="/" className="flex min-w-0 shrink-0 items-center gap-2">
@@ -36,7 +36,7 @@ export function Header({ categories }: HeaderProps) {
               <input
                 type="search"
                 placeholder="Buscar no SíndicoLab..."
-                className="h-10 w-full rounded-full border border-input bg-background pl-10 pr-4 text-sm text-foreground outline-none ring-offset-background transition-colors focus-visible:ring-2 focus-visible:ring-ring"
+                className="h-10 w-full rounded-full border border-input bg-white/40 backdrop-blur pl-10 pr-4 text-sm text-foreground outline-none ring-offset-background transition-colors focus-visible:ring-2 focus-visible:ring-ring"
               />
             </div>
           </div>
@@ -58,7 +58,7 @@ export function Header({ categories }: HeaderProps) {
         </div>
       </div>
 
-      <nav className="border-t border-border bg-background/95 backdrop-blur">
+      <nav className="border-t border-border">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ul className="hidden items-center gap-1 overflow-x-auto py-2 text-sm font-medium text-foreground md:flex">
             {categories.map((category) => (
@@ -93,7 +93,7 @@ export function Header({ categories }: HeaderProps) {
                 <input
                   type="search"
                   placeholder="Buscar no SíndicoLab..."
-                  className="h-10 w-full rounded-full border border-input bg-background pl-10 pr-4 text-sm text-foreground outline-none ring-offset-background transition-colors focus-visible:ring-2 focus-visible:ring-ring"
+                  className="h-10 w-full rounded-full border border-input bg-white/40 backdrop-blur pl-10 pr-4 text-sm text-foreground outline-none ring-offset-background transition-colors focus-visible:ring-2 focus-visible:ring-ring"
                 />
               </div>
               {categories.map((category) => (
