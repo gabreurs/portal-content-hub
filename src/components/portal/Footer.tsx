@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Linkedin, Instagram, Youtube } from "lucide-react";
+import logoAsset from "@/assets/sindicolab-logo.png.asset.json";
 
 interface Category {
   slug: string;
