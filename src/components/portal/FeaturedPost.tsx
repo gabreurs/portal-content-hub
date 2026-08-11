@@ -31,11 +31,12 @@ export function FeaturedPost({ post }: FeaturedPostProps) {
     : "";
 
   return (
-    <article className="group relative overflow-hidden rounded-2xl bg-card shadow-sm">
+    <article className="surface-card group relative h-full overflow-hidden rounded-xl">
       <Link
         to="/noticia/$slug"
         params={{ slug: post.slug }}
-        className="relative block aspect-[16/9] overflow-hidden md:aspect-[21/9]"
+        className="relative block aspect-[16/10] h-full overflow-hidden md:aspect-[4/3]"
+
       >
         <CoverImage
           src={post.cover_image}
@@ -46,26 +47,27 @@ export function FeaturedPost({ post }: FeaturedPostProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
       </Link>
 
-      <div className="absolute bottom-0 left-0 right-0 p-6 text-white md:p-8">
+      <div className="absolute bottom-0 left-0 right-0 p-5 text-white md:p-6">
         {post.categories && (
           <Link
             to="/categoria/$slug"
             params={{ slug: post.categories.slug }}
-            className="mb-3 inline-block rounded-full bg-primary px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary-foreground"
+            className="mb-3 inline-block rounded-md bg-primary px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-primary-foreground"
           >
             {post.categories.name}
           </Link>
         )}
         <Link to="/noticia/$slug" params={{ slug: post.slug }}>
-          <h2 className="mb-3 text-2xl font-bold leading-tight text-white transition-colors group-hover:text-white/90 md:text-4xl">
+          <h2 className="mb-2 text-xl font-bold leading-tight text-white transition-colors group-hover:text-white/90 md:text-2xl">
             {post.title}
           </h2>
         </Link>
         {post.excerpt && (
-          <p className="mb-4 hidden max-w-2xl text-base text-white/80 md:block md:text-lg">
+          <p className="mb-3 line-clamp-2 max-w-2xl text-sm text-white/80">
             {post.excerpt}
           </p>
         )}
+
         <div className="flex flex-wrap items-center gap-3 text-sm text-white/70">
           {post.authors && (
             <div className="flex items-center gap-2">
