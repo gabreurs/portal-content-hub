@@ -7,12 +7,14 @@ import { Footer } from "@/components/portal/Footer";
 import { FeaturedPost } from "@/components/portal/FeaturedPost";
 import { PostCard } from "@/components/portal/PostCard";
 import { CategorySection } from "@/components/portal/CategorySection";
+import { ColumnistCard } from "@/components/portal/ColumnistCard";
 import {
   getCategories,
   getFeaturedPost,
   getLatestPosts,
   getMostReadPosts,
 } from "@/lib/posts.functions";
+import { getColumnists } from "@/lib/authors.functions";
 
 const categoriesQueryOptions = queryOptions({
   queryKey: ["categories"],
@@ -35,6 +37,12 @@ const latestPostsQueryOptions = queryOptions({
 const mostReadPostsQueryOptions = queryOptions({
   queryKey: ["most-read-posts"],
   queryFn: () => getMostReadPosts({ data: { limit: 5 } }),
+  staleTime: 5 * 60 * 1000,
+});
+
+const columnistsQueryOptions = queryOptions({
+  queryKey: ["columnists"],
+  queryFn: () => getColumnists(),
   staleTime: 5 * 60 * 1000,
 });
 
@@ -63,6 +71,7 @@ export const Route = createFileRoute("/")({
       context.queryClient.ensureQueryData(featuredPostQueryOptions),
       context.queryClient.ensureQueryData(latestPostsQueryOptions),
       context.queryClient.ensureQueryData(mostReadPostsQueryOptions),
+      context.queryClient.ensureQueryData(columnistsQueryOptions),
     ]);
   },
   component: HomePage,
@@ -73,6 +82,7 @@ function HomePage() {
   const { data: featuredPost } = useSuspenseQuery(featuredPostQueryOptions);
   const { data: latestPosts } = useSuspenseQuery(latestPostsQueryOptions);
   const { data: mostReadPosts } = useSuspenseQuery(mostReadPostsQueryOptions);
+  const { data: columnists } = useSuspenseQuery(columnistsQueryOptions);
 
   const postsByCategory = categories.map((category) => ({
     category,
@@ -160,6 +170,25 @@ function HomePage() {
           {postsByCategory.map(
             ({ category, posts }) =>
               posts.length > 0 && <CategorySection key={category.slug} category={category} posts={posts} />
+          )}
+
+          {columnists.length > 0 && (
+            <section className="border-t border-border py-8">
+              <div className="mb-4 flex items-center justify-between">
+                <h2 className="text-xl font-bold text-foreground">Colunistas</h2>
+                <Link
+                  to="/colunistas"
+                  className="text-sm font-medium text-primary transition-colors hover:text-primary/80"
+                >
+                  Ver todos
+                </Link>
+              </div>
+              <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                {columnists.slice(0, 4).map((columnist) => (
+                  <ColumnistCard key={columnist.id} columnist={columnist} />
+                ))}
+              </div>
+            </section>
           )}
 
           <section className="border-t border-border py-8">

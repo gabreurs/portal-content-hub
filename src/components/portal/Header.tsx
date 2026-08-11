@@ -70,6 +70,15 @@ export function Header({ categories }: HeaderProps) {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link
+                to="/colunistas"
+                className="block rounded-md px-3 py-2 text-foreground/80 transition-colors hover:bg-accent hover:text-accent-foreground"
+                activeProps={{ className: "bg-accent text-accent-foreground" }}
+              >
+                Colunistas
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -95,6 +104,13 @@ export function Header({ categories }: HeaderProps) {
                   {category.name}
                 </Link>
               ))}
+              <Link
+                to="/colunistas"
+                className="block rounded-md px-3 py-2 text-foreground/80 transition-colors hover:bg-accent hover:text-accent-foreground"
+                onClick={() => setMobileOpen(false)}
+              >
+                Colunistas
+              </Link>
               <Link
                 to="/auth"
                 className="block rounded-md px-3 py-2 text-foreground/80 transition-colors hover:bg-accent hover:text-accent-foreground"

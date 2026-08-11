@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { queryOptions } from "@tanstack/react-query";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { Plus, Edit, Eye, LogOut, LayoutDashboard, FileText } from "lucide-react";
+import { Plus, Edit, Eye, LogOut, LayoutDashboard, FileText, Users } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { getAllPostsAdmin, getCategories, getAuthors } from "@/lib/posts.functions";
 
@@ -107,6 +107,14 @@ function AdminPage() {
               {posts.length} {posts.length === 1 ? "publicação" : "publicações"} no total
             </p>
           </div>
+          <div className="flex items-center gap-3">
+          <Link
+            to="/admin/colunistas"
+            className="inline-flex h-10 items-center gap-2 rounded-md border border-input bg-background px-4 text-sm font-semibold text-foreground transition-colors hover:bg-accent"
+          >
+            <Users className="h-4 w-4" />
+            Colunistas
+          </Link>
           <Link
             to="/admin/nova"
             className="inline-flex h-10 items-center gap-2 rounded-md bg-primary px-4 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
@@ -114,6 +122,7 @@ function AdminPage() {
             <Plus className="h-4 w-4" />
             Nova notícia
           </Link>
+          </div>
         </div>
 
         <div className="overflow-hidden rounded-xl border border-border bg-card shadow-sm">

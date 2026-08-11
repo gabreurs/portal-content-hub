@@ -12,10 +12,13 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ColunistasRouteImport } from './routes/colunistas'
 import { Route as SetupAdminRouteImport } from './routes/setup-admin'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as CategoriaSlugRouteImport } from './routes/categoria.$slug'
+import { Route as ColunistaSlugRouteImport } from './routes/colunista.$slug'
 import { Route as NoticiaSlugRouteImport } from './routes/noticia.$slug'
+import { Route as AuthenticatedAdminColunistasRouteImport } from './routes/_authenticated/admin.colunistas'
 import { Route as AuthenticatedAdminNovaRouteImport } from './routes/_authenticated/admin.nova'
 import { Route as AuthenticatedAdminEditIdRouteImport } from './routes/_authenticated/admin.edit.$id'
 
@@ -33,6 +36,11 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ColunistasRoute = ColunistasRouteImport.update({
+  id: '/colunistas',
+  path: '/colunistas',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SetupAdminRoute = SetupAdminRouteImport.update({
   id: '/setup-admin',
   path: '/setup-admin',
@@ -48,11 +56,22 @@ const CategoriaSlugRoute = CategoriaSlugRouteImport.update({
   path: '/categoria/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ColunistaSlugRoute = ColunistaSlugRouteImport.update({
+  id: '/colunista/$slug',
+  path: '/colunista/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NoticiaSlugRoute = NoticiaSlugRouteImport.update({
   id: '/noticia/$slug',
   path: '/noticia/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminColunistasRoute =
+  AuthenticatedAdminColunistasRouteImport.update({
+    id: '/colunistas',
+    path: '/colunistas',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 const AuthenticatedAdminNovaRoute = AuthenticatedAdminNovaRouteImport.update({
   id: '/nova',
   path: '/nova',
@@ -68,20 +87,26 @@ const AuthenticatedAdminEditIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/colunistas': typeof ColunistasRoute
   '/setup-admin': typeof SetupAdminRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/categoria/$slug': typeof CategoriaSlugRoute
+  '/colunista/$slug': typeof ColunistaSlugRoute
   '/noticia/$slug': typeof NoticiaSlugRoute
+  '/admin/colunistas': typeof AuthenticatedAdminColunistasRoute
   '/admin/nova': typeof AuthenticatedAdminNovaRoute
   '/admin/edit/$id': typeof AuthenticatedAdminEditIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/colunistas': typeof ColunistasRoute
   '/setup-admin': typeof SetupAdminRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/categoria/$slug': typeof CategoriaSlugRoute
+  '/colunista/$slug': typeof ColunistaSlugRoute
   '/noticia/$slug': typeof NoticiaSlugRoute
+  '/admin/colunistas': typeof AuthenticatedAdminColunistasRoute
   '/admin/nova': typeof AuthenticatedAdminNovaRoute
   '/admin/edit/$id': typeof AuthenticatedAdminEditIdRoute
 }
@@ -90,10 +115,13 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/colunistas': typeof ColunistasRoute
   '/setup-admin': typeof SetupAdminRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/categoria/$slug': typeof CategoriaSlugRoute
+  '/colunista/$slug': typeof ColunistaSlugRoute
   '/noticia/$slug': typeof NoticiaSlugRoute
+  '/_authenticated/admin/colunistas': typeof AuthenticatedAdminColunistasRoute
   '/_authenticated/admin/nova': typeof AuthenticatedAdminNovaRoute
   '/_authenticated/admin/edit/$id': typeof AuthenticatedAdminEditIdRoute
 }
@@ -102,20 +130,26 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/colunistas'
     | '/setup-admin'
     | '/admin'
     | '/categoria/$slug'
+    | '/colunista/$slug'
     | '/noticia/$slug'
+    | '/admin/colunistas'
     | '/admin/nova'
     | '/admin/edit/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
+    | '/colunistas'
     | '/setup-admin'
     | '/admin'
     | '/categoria/$slug'
+    | '/colunista/$slug'
     | '/noticia/$slug'
+    | '/admin/colunistas'
     | '/admin/nova'
     | '/admin/edit/$id'
   id:
@@ -123,10 +157,13 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/colunistas'
     | '/setup-admin'
     | '/_authenticated/admin'
     | '/categoria/$slug'
+    | '/colunista/$slug'
     | '/noticia/$slug'
+    | '/_authenticated/admin/colunistas'
     | '/_authenticated/admin/nova'
     | '/_authenticated/admin/edit/$id'
   fileRoutesById: FileRoutesById
@@ -135,8 +172,10 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  ColunistasRoute: typeof ColunistasRoute
   SetupAdminRoute: typeof SetupAdminRoute
   CategoriaSlugRoute: typeof CategoriaSlugRoute
+  ColunistaSlugRoute: typeof ColunistaSlugRoute
   NoticiaSlugRoute: typeof NoticiaSlugRoute
 }
 
@@ -163,6 +202,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/colunistas': {
+      id: '/colunistas'
+      path: '/colunistas'
+      fullPath: '/colunistas'
+      preLoaderRoute: typeof ColunistasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/setup-admin': {
       id: '/setup-admin'
       path: '/setup-admin'
@@ -184,12 +230,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CategoriaSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/colunista/$slug': {
+      id: '/colunista/$slug'
+      path: '/colunista/$slug'
+      fullPath: '/colunista/$slug'
+      preLoaderRoute: typeof ColunistaSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/noticia/$slug': {
       id: '/noticia/$slug'
       path: '/noticia/$slug'
       fullPath: '/noticia/$slug'
       preLoaderRoute: typeof NoticiaSlugRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin/colunistas': {
+      id: '/_authenticated/admin/colunistas'
+      path: '/colunistas'
+      fullPath: '/admin/colunistas'
+      preLoaderRoute: typeof AuthenticatedAdminColunistasRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
     }
     '/_authenticated/admin/nova': {
       id: '/_authenticated/admin/nova'
@@ -209,11 +269,13 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedAdminRouteChildren {
+  AuthenticatedAdminColunistasRoute: typeof AuthenticatedAdminColunistasRoute
   AuthenticatedAdminNovaRoute: typeof AuthenticatedAdminNovaRoute
   AuthenticatedAdminEditIdRoute: typeof AuthenticatedAdminEditIdRoute
 }
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
+  AuthenticatedAdminColunistasRoute: AuthenticatedAdminColunistasRoute,
   AuthenticatedAdminNovaRoute: AuthenticatedAdminNovaRoute,
   AuthenticatedAdminEditIdRoute: AuthenticatedAdminEditIdRoute,
 }
@@ -236,20 +298,12 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  ColunistasRoute: ColunistasRoute,
   SetupAdminRoute: SetupAdminRoute,
   CategoriaSlugRoute: CategoriaSlugRoute,
+  ColunistaSlugRoute: ColunistaSlugRoute,
   NoticiaSlugRoute: NoticiaSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
