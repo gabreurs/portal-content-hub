@@ -19,11 +19,13 @@ export function Header({ categories }: HeaderProps) {
     <header className="border-b border-border bg-background">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between gap-4">
-          <Link to="/" className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <span className="text-lg font-bold">S</span>
-            </div>
-            <span className="text-xl font-bold tracking-tight text-foreground">
+          <Link to="/" className="flex min-w-0 shrink-0 items-center gap-2">
+            <img
+              src={logoAsset.url}
+              alt="SíndicoLab"
+              className="h-9 w-9 shrink-0 rounded-lg object-cover"
+            />
+            <span className="truncate text-xl font-bold tracking-tight text-foreground">
               Síndico<span className="text-primary">Lab</span>
             </span>
           </Link>
