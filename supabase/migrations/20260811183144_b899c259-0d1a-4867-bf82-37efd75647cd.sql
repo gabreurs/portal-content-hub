@@ -1,0 +1,2 @@
+UPDATE public.posts SET cover_image = 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80' WHERE slug = 'nova-lei-das-assembleias-virtuais';
+UPDATE public.posts SET cover_image = 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80' WHERE slug = 'convivencia-entre-moradores';

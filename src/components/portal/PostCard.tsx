@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { CoverImage } from "./CoverImage";
 
 interface Post {
   id: string;
@@ -39,18 +40,11 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
           params={{ slug: post.slug }}
           className="relative block h-24 w-24 flex-shrink-0 overflow-hidden rounded-lg bg-muted"
         >
-          {post.cover_image ? (
-            <img
-              src={post.cover_image}
-              alt={post.title}
-              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-              loading="lazy"
-            />
-          ) : (
-            <div className="flex h-full w-full items-center justify-center text-muted-foreground">
-              <span className="text-xs">Sem imagem</span>
-            </div>
-          )}
+          <CoverImage
+            src={post.cover_image}
+            alt={post.title}
+            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          />
         </Link>
         <div className="flex flex-col justify-center">
           {post.categories && (
@@ -94,18 +88,11 @@ export function PostCard({ post, variant = "default" }: PostCardProps) {
         params={{ slug: post.slug }}
         className="relative mb-3 block aspect-[16/10] overflow-hidden rounded-xl bg-muted"
       >
-        {post.cover_image ? (
-          <img
-            src={post.cover_image}
-            alt={post.title}
-            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-            loading="lazy"
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center text-muted-foreground">
-            <span className="text-sm">Sem imagem</span>
-          </div>
-        )}
+        <CoverImage
+          src={post.cover_image}
+          alt={post.title}
+          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+        />
       </Link>
       {post.categories && (
         <Link
