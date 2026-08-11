@@ -96,12 +96,23 @@ function HomePage() {
       <main className="flex-1">
         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
           <div className="grid gap-8 lg:grid-cols-12">
-            <div className="lg:col-span-8">
+            <div className="space-y-6 lg:col-span-8">
               {featuredPost ? (
                 <FeaturedPost post={featuredPost} />
               ) : (
                 <div className="flex aspect-[21/9] items-center justify-center rounded-2xl bg-muted text-muted-foreground">
                   Nenhuma notícia em destaque
+                </div>
+              )}
+
+              {latestPosts.filter((p) => p.id !== featuredPost?.id).length > 0 && (
+                <div className="grid gap-6 sm:grid-cols-2">
+                  {latestPosts
+                    .filter((p) => p.id !== featuredPost?.id)
+                    .slice(0, 2)
+                    .map((post) => (
+                      <PostCard key={post.id} post={post} />
+                    ))}
                 </div>
               )}
             </div>
