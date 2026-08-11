@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Search, Menu, X } from "lucide-react";
 import { useState } from "react";
+import logoAsset from "@/assets/sindicolab-logo.png.asset.json";
 
 interface Category {
   slug: string;
