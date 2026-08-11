@@ -37,17 +37,12 @@ export function FeaturedPost({ post }: FeaturedPostProps) {
         params={{ slug: post.slug }}
         className="relative block aspect-[16/9] overflow-hidden md:aspect-[21/9]"
       >
-        {post.cover_image ? (
-          <img
-            src={post.cover_image}
-            alt={post.title}
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center bg-muted text-muted-foreground">
-            <span>Sem imagem</span>
-          </div>
-        )}
+        <CoverImage
+          src={post.cover_image}
+          alt={post.title}
+          loading="eager"
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
       </Link>
 
