@@ -20,30 +20,45 @@ export type Database = {
           avatar_url: string | null
           bio: string | null
           created_at: string
+          headline: string | null
           id: string
+          instagram_url: string | null
+          is_columnist: boolean
+          linkedin_url: string | null
           name: string
           role: string | null
           slug: string
+          sort_order: number
         }
         Insert: {
           active?: boolean
           avatar_url?: string | null
           bio?: string | null
           created_at?: string
+          headline?: string | null
           id?: string
+          instagram_url?: string | null
+          is_columnist?: boolean
+          linkedin_url?: string | null
           name: string
           role?: string | null
           slug: string
+          sort_order?: number
         }
         Update: {
           active?: boolean
           avatar_url?: string | null
           bio?: string | null
           created_at?: string
+          headline?: string | null
           id?: string
+          instagram_url?: string | null
+          is_columnist?: boolean
+          linkedin_url?: string | null
           name?: string
           role?: string | null
           slug?: string
+          sort_order?: number
         }
         Relationships: []
       }
