@@ -18,9 +18,11 @@ export function Footer({ categories }: FooterProps) {
         <div className="grid gap-8 md:grid-cols-4">
           <div className="space-y-4">
             <Link to="/" className="flex items-center gap-2">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                <span className="text-lg font-bold">S</span>
-              </div>
+              <img
+                src={logoAsset.url}
+                alt="SíndicoLab"
+                className="h-9 w-9 shrink-0 rounded-lg object-cover"
+              />
               <span className="text-xl font-bold tracking-tight text-foreground">
                 Síndico<span className="text-primary">Lab</span>
               </span>
