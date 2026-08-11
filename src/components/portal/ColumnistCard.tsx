@@ -22,7 +22,7 @@ export function ColumnistCard({ columnist }: { columnist: Columnist }) {
     <Link
       to="/colunista/$slug"
       params={{ slug: columnist.slug }}
-      className="glass-card group flex flex-col items-center rounded-2xl p-5 text-center"
+      className="surface-card group flex flex-col items-center rounded-xl p-5 text-center"
     >
       <div className="h-20 w-20 overflow-hidden rounded-full bg-muted ring-2 ring-primary/30">
         {columnist.avatar_url ? (
