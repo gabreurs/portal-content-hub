@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ColunistasRouteImport } from './routes/colunistas'
 import { Route as SetupAdminRouteImport } from './routes/setup-admin'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as CategoriaSlugRouteImport } from './routes/categoria.$slug'
@@ -31,6 +32,11 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ColunistasRoute = ColunistasRouteImport.update({
+  id: '/colunistas',
+  path: '/colunistas',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SetupAdminRoute = SetupAdminRouteImport.update({
@@ -68,6 +74,7 @@ const AuthenticatedAdminEditIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/colunistas': typeof ColunistasRoute
   '/setup-admin': typeof SetupAdminRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/categoria/$slug': typeof CategoriaSlugRoute
@@ -78,6 +85,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/colunistas': typeof ColunistasRoute
   '/setup-admin': typeof SetupAdminRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/categoria/$slug': typeof CategoriaSlugRoute
@@ -90,6 +98,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/colunistas': typeof ColunistasRoute
   '/setup-admin': typeof SetupAdminRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/categoria/$slug': typeof CategoriaSlugRoute
@@ -102,6 +111,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/colunistas'
     | '/setup-admin'
     | '/admin'
     | '/categoria/$slug'
@@ -112,6 +122,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/colunistas'
     | '/setup-admin'
     | '/admin'
     | '/categoria/$slug'
@@ -123,6 +134,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/colunistas'
     | '/setup-admin'
     | '/_authenticated/admin'
     | '/categoria/$slug'
@@ -135,6 +147,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  ColunistasRoute: typeof ColunistasRoute
   SetupAdminRoute: typeof SetupAdminRoute
   CategoriaSlugRoute: typeof CategoriaSlugRoute
   NoticiaSlugRoute: typeof NoticiaSlugRoute
@@ -161,6 +174,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/colunistas': {
+      id: '/colunistas'
+      path: '/colunistas'
+      fullPath: '/colunistas'
+      preLoaderRoute: typeof ColunistasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/setup-admin': {
@@ -236,6 +256,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  ColunistasRoute: ColunistasRoute,
   SetupAdminRoute: SetupAdminRoute,
   CategoriaSlugRoute: CategoriaSlugRoute,
   NoticiaSlugRoute: NoticiaSlugRoute,
@@ -243,13 +264,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
