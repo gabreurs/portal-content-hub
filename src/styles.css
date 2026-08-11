@@ -155,5 +155,55 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    background-image:
+      radial-gradient(60rem 40rem at 8% -10%, color-mix(in oklab, var(--brand-blue) 30%, transparent), transparent 60%),
+      radial-gradient(55rem 38rem at 95% 0%, color-mix(in oklab, var(--brand-magenta) 28%, transparent), transparent 60%),
+      radial-gradient(70rem 50rem at 50% 100%, color-mix(in oklab, var(--brand-violet) 25%, transparent), transparent 65%);
+    background-attachment: fixed;
   }
 }
+
+@utility glass {
+  background: color-mix(in oklab, white 55%, transparent);
+  border: 1px solid color-mix(in oklab, white 60%, transparent);
+  backdrop-filter: blur(18px) saturate(160%);
+  box-shadow: var(--shadow-glass);
+}
+
+@utility glass-card {
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, white 62%, transparent),
+    color-mix(in oklab, var(--brand-violet) 8%, transparent)
+  );
+  border: 1px solid color-mix(in oklab, white 55%, transparent);
+  backdrop-filter: blur(16px) saturate(150%);
+  box-shadow: var(--shadow-glass);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in oklab, var(--brand-violet) 40%, transparent);
+    box-shadow: 0 14px 40px color-mix(in oklab, var(--brand-violet) 25%, transparent);
+  }
+}
+
+@utility glass-panel {
+  background: color-mix(in oklab, white 45%, transparent);
+  border: 1px solid color-mix(in oklab, white 50%, transparent);
+  backdrop-filter: blur(22px) saturate(160%);
+}
+
+@utility brand-gradient {
+  background-image: var(--gradient-brand);
+}
+
+@utility brand-text {
+  background-image: var(--gradient-brand);
+  background-clip: text;
+  color: transparent;
+}
+
