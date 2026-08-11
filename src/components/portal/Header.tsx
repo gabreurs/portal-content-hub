@@ -63,7 +63,7 @@ export function Header({ categories }: HeaderProps) {
             <span className="flex items-center gap-2">
               <CalendarDays className="h-5 w-5 text-primary" />
               <span className="leading-tight">
-                <span className="block capitalize text-foreground">{dateLabel}</span>
+                <span className="block text-foreground first-letter:uppercase">{dateLabel}</span>
                 <span className="block text-xs">São Paulo, SP</span>
               </span>
             </span>
