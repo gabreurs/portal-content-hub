@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as SetupAdminRouteImport } from './routes/setup-admin'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as CategoriaSlugRouteImport } from './routes/categoria.$slug'
 import { Route as NoticiaSlugRouteImport } from './routes/noticia.$slug'
@@ -30,6 +31,11 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SetupAdminRoute = SetupAdminRouteImport.update({
+  id: '/setup-admin',
+  path: '/setup-admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
@@ -62,6 +68,7 @@ const AuthenticatedAdminEditIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/setup-admin': typeof SetupAdminRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/categoria/$slug': typeof CategoriaSlugRoute
   '/noticia/$slug': typeof NoticiaSlugRoute
@@ -71,6 +78,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/setup-admin': typeof SetupAdminRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/categoria/$slug': typeof CategoriaSlugRoute
   '/noticia/$slug': typeof NoticiaSlugRoute
@@ -82,6 +90,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/setup-admin': typeof SetupAdminRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/categoria/$slug': typeof CategoriaSlugRoute
   '/noticia/$slug': typeof NoticiaSlugRoute
@@ -93,6 +102,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/setup-admin'
     | '/admin'
     | '/categoria/$slug'
     | '/noticia/$slug'
@@ -102,6 +112,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/setup-admin'
     | '/admin'
     | '/categoria/$slug'
     | '/noticia/$slug'
@@ -112,6 +123,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/setup-admin'
     | '/_authenticated/admin'
     | '/categoria/$slug'
     | '/noticia/$slug'
@@ -123,6 +135,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  SetupAdminRoute: typeof SetupAdminRoute
   CategoriaSlugRoute: typeof CategoriaSlugRoute
   NoticiaSlugRoute: typeof NoticiaSlugRoute
 }
@@ -148,6 +161,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/setup-admin': {
+      id: '/setup-admin'
+      path: '/setup-admin'
+      fullPath: '/setup-admin'
+      preLoaderRoute: typeof SetupAdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin': {
@@ -216,6 +236,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  SetupAdminRoute: SetupAdminRoute,
   CategoriaSlugRoute: CategoriaSlugRoute,
   NoticiaSlugRoute: NoticiaSlugRoute,
 }
